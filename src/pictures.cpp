@@ -72,10 +72,16 @@ void DrawImage(const string& image_name, const Matrix& matrix,
 	}
 
 	// draw intersections as green dots on the image
-	const int dot_size = 10;
+	const int dot_size = 0.02 * matrix.size();
 	for (int i = 0; i < critical_points.size(); ++i) {
 		DrawDot(image, critical_points[i], dot_size, cv::Vec3b(0, 255, 0));
 	}
+
+	// draw scan radius size on picture
+	DrawDot(image, Point{0, 0}, dot_size);
+	const int r = 12;
+	// const int r = static_cast<int>(0.05 * matrix.size());
+	DrawDot(image, Point{0, r}, dot_size);
 
 	imwrite("../output/" + image_name, image);
 	cout << "Result image has been saved in output folder as '" << image_name << "'" << endl;

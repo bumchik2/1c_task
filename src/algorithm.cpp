@@ -14,7 +14,7 @@ double Density(const Matrix& matrix, const Point& point, int r) {
 
 	for (int i = point.row - r; i <= point.row + r; ++i) {
 		for (int j = point.column - r; j <= point.column + r; ++j) {
-			if (!IsCorrect(Point{i, j}, rows, cols) || Length(point - Point{i, j}) > r) {
+			if (!IsCorrect(Point{i, j}, rows, cols) || Distance(point, Point{i, j}) > r) {
 				continue;
 			}
 
@@ -36,9 +36,6 @@ bool DensityIsBetween(const Matrix& matrix, const Point& point, int r,
 
 bool IsDense(const Matrix& matrix, const Point& point, int r) {
 	const double high_density = 0.5;
-	if (DensityIsBetween(matrix, point, r, high_density, 1)) {
-		cout << "IS DENSE!" << endl;
-	}
 	return DensityIsBetween(matrix, point, r, high_density, 1);
 }
 
@@ -74,9 +71,6 @@ double SymmetryCoefficient(const Matrix& matrix, const Point& point, int r) {
 
 bool IsSymmetric(const Matrix& matrix, const Point& point, int r) {
 	const double normal_symmetry_coefficient = 0.9;
-	if (!(SymmetryCoefficient(matrix, point, r) > normal_symmetry_coefficient)) {
-		cout << "ASYMMETRIC!" << endl;
-	}
 	return SymmetryCoefficient(matrix, point, r) > normal_symmetry_coefficient;
 }
 
@@ -85,7 +79,7 @@ bool IsLocalDensityMaximum(const Matrix& matrix, const Point& point,
 	const int rows = matrix.size();
 	const int cols = matrix[0].size();
 
-	double density = Density(matrix, point, r);
+	double density = density_matrix[point.row][point.column];
 
 	for (int i = point.row - r; i <= point.row + r; ++i) {
 		for (int j = point.column - r; j <= point.column + r; ++j) {

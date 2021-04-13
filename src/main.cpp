@@ -35,8 +35,7 @@ void SolveProblem(const string& file_name, bool generate_result_image=true) {
 
 int main() {
 	cout << "Enter full path to the image:" << endl;
-	// example: /home/elisey/1c_task/1c_task/pictures/test_image.png
-
+	// example: /home/elisey/1c_task/1c_task/input_examples/test_image.png
 	string file_name;
 	cin >> file_name;
 	SolveProblem(file_name);
